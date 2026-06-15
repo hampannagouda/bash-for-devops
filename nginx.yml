@@ -1,0 +1,19 @@
+---
+- name: check with targets
+  hosts: dev
+  user: ansible
+  become: yes
+  connection: ssh
+  gather_facts: no
+  tasks:
+    - name: update apt cache
+      apt:
+        update_cache: yes
+    - name: install nginx
+      apt:
+        name: nginx
+        state: present
+    - name: start nginx service
+      service:
+        name: nginx
+        state: started
